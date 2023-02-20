@@ -64,10 +64,12 @@ const postCarrito =  async (req, res)=>{
 const  getCarrito = async (req, res) => {
   const {id} = req.params;
   //const prodCarrito = await CarritoModel.findById(id).productos;
-  const prodCarrito = await CarritoModel.findOne({_id: id}).productos;
+  const prodCarrito = await CarritoModel.findOne({_id: id});
+  const productos = prodCarrito.productos;
+  console.log(productos)
   //const prodCarrito = await CarritoModel.findOne({_id: id}, {productos})
-  console.log("prodCarrito", prodCarrito)
-  const productosMap = prodCarrito.map( (item) => (
+  console.log("productos", productos)
+  const productosMap = productos.map( (item) => (
     {
       title:item.title,
       price:item.price,
