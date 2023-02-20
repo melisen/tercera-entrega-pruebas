@@ -1,0 +1,143 @@
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"error","message":"/api/productos -  GET"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"warn","message":"petición a ruta inexistente"}
+{"level":"error","message":"Error in Saving user in Usuarios "}
+{"level":"error","message":"Error in Saving user in Usuarios "}
+{"level":"error","message":"Error in Saving user in Usuarios "}
+{"level":"error","message":"User already exists"}
+{"level":"error","message":"Error in Saving user in Usuarios "}
+{"level":"error","message":"Error in Saving user in Usuarios "}
+{"level":"error","message":"User already exists"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"_message":"carritos validation failed","errors":{"productos.0.price":{"kind":"required","message":"Path `price` is required.","name":"ValidatorError","path":"price","properties":{"message":"Path `price` is required.","path":"price","type":"required"}},"productos.0.quantity":{"kind":"required","message":"Path `quantity` is required.","name":"ValidatorError","path":"quantity","properties":{"message":"Path `quantity` is required.","path":"quantity","type":"required"}},"productos.0.thumbnail":{"kind":"required","message":"Path `thumbnail` is required.","name":"ValidatorError","path":"thumbnail","properties":{"message":"Path `thumbnail` is required.","path":"thumbnail","type":"required"}},"productos.0.title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"error","message":"carritos validation failed: productos.0.quantity: Path `quantity` is required., productos.0.thumbnail: Path `thumbnail` is required., productos.0.price: Path `price` is required., productos.0.title: Path `title` is required.","name":"ValidationError"}
+{"level":"error"}
+{"_message":"carritos validation failed","errors":{"productos.0.price":{"kind":"required","message":"Path `price` is required.","name":"ValidatorError","path":"price","properties":{"message":"Path `price` is required.","path":"price","type":"required"}},"productos.0.quantity":{"kind":"required","message":"Path `quantity` is required.","name":"ValidatorError","path":"quantity","properties":{"message":"Path `quantity` is required.","path":"quantity","type":"required"}},"productos.0.thumbnail":{"kind":"required","message":"Path `thumbnail` is required.","name":"ValidatorError","path":"thumbnail","properties":{"message":"Path `thumbnail` is required.","path":"thumbnail","type":"required"}},"productos.0.title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"error","message":"carritos validation failed: productos.0.quantity: Path `quantity` is required., productos.0.thumbnail: Path `thumbnail` is required., productos.0.price: Path `price` is required., productos.0.title: Path `title` is required.","name":"ValidationError"}
+{"level":"error"}
+{"_message":"carritos validation failed","errors":{"productos.0.price":{"kind":"required","message":"Path `price` is required.","name":"ValidatorError","path":"price","properties":{"message":"Path `price` is required.","path":"price","type":"required"}},"productos.0.quantity":{"kind":"required","message":"Path `quantity` is required.","name":"ValidatorError","path":"quantity","properties":{"message":"Path `quantity` is required.","path":"quantity","type":"required"}},"productos.0.thumbnail":{"kind":"required","message":"Path `thumbnail` is required.","name":"ValidatorError","path":"thumbnail","properties":{"message":"Path `thumbnail` is required.","path":"thumbnail","type":"required"}},"productos.0.title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"error","message":"carritos validation failed: productos.0.quantity: Path `quantity` is required., productos.0.thumbnail: Path `thumbnail` is required., productos.0.price: Path `price` is required., productos.0.title: Path `title` is required.","name":"ValidationError"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"ERR_HTTP_INVALID_STATUS_CODE","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[AsyncFunction: buscarUltimoCarrito]\" (type function) at path \"_id\" for model \"carritos\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[AsyncFunction: buscarUltimoCarrito]\"","valueType":"function"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \":id\" (type string) at path \"_id\" for model \"carritos\"","name":"CastError","path":"_id","reason":{},"stringValue":"\":id\"","value":":id","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \":id\" (type string) at path \"_id\" for model \"carritos\"","name":"CastError","path":"_id","reason":{},"stringValue":"\":id\"","value":":id","valueType":"string"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}

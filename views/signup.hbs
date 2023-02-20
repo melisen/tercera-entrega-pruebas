@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Signup</title>
+
+</head>
+
+<body>
+    <div style="background-color:rgb(226, 225, 225); margin:10px; padding:20px; margin:20px;">
+        <h1 style="color:blue; font-weight:bold;">Registro de usuario</h1>
+        <form method="post" action="/signup">
+            <input placeholder="Email" name="username" id="username" style="width:60%; margin:10px;" />
+            <p id="resultado-email"></p>
+            <br />
+            <input placeholder="Contraseña" name="password" id="password" style="width:60%; margin:10px;" />
+            <br />
+            <input placeholder="Nombre" name="nombre" id="nombre" style="width:60%; margin:10px;" />
+            <br />
+            <input placeholder="Apellido" name="apellido" id="apellido" style="width:60%; margin:10px;" />
+            <br />
+            <input placeholder="Dirección" name="direccion" id="direccion" style="width:60%; margin:10px;" />
+            <br />
+            <input placeholder="Edad" name="edad" id="edad" style="width:60%; margin:10px;" maxlength="3" />
+            <br />
+            <input placeholder="Teléfono con prefijo internacional y código de área" name="telefono" id="telefono"
+                style="width:60%; margin:10px;" maxlength="13" /> <br />
+            <label for="telefono">ej. Buenos Aires, Argentina +541127204753</label>
+            <br />
+            <input placeholder="Avatar" name="avatar" id="avatar" style="width:60%; margin:10px;" />
+            <br />
+            <button type="submit" id="btn-register"
+                style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
+                Register</button>
+        </form>
+        <div id="div-completar-campos" style="display:none;">
+            <h3>Falta completar campos para poder enviar el registro</h3>
+        </div>
+        <button
+            style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;"><a
+                href="/login">Ir
+                a
+                login</a></button>
+
+    </div>
+
+
+    <script src="./signup.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="./estilos.css">
+</head>
+
+<body>
+    <header class="container-fluid" id="header">
+        <nav id="navbar">
+            <div class="container-fluid">
+
+                <ul style="display:flex; flex-direction:row; justify-content:space-around;">
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/api/productos">Administración</a>
+                    </li>
+
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/api/carrito">Crear Carrito</a>
+                    </li>
+                    <li class="btn-navbar">
+                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+
+
+    <div style="background-color:rgb(226, 225, 225); margin:10px; padding:20px; margin:20px;">
+        <h2 style="color:rgb(18, 18, 122); font-weight:bold;">Usuario: {{user.username}} </h2>
+        <br />
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <header class="container-fluid" id="header">
+        <nav id="navbar">
+            <div class="container-fluid">
+
+                <ul style="display:flex; flex-direction:row; justify-content:space-around;">
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/api/productos">Administración</a>
+                    </li>
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/nuestros-productos">Nuestros Productos</a>
+                    </li>
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/api/carrito">Carrito</a>
+                    </li>
+                    <li class="btn-navbar">
+                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- server mande a esta vista de handlebars el objeto prod y rellenar campos-->
+
+    <div class="card">
+        <div class="container-img bordes">
+            <img src="{{prod.thumbnail}}" alt="{{prod.title}}" class="img-card" />
+        </div>
+        <div class="container bordes">
+            <h4> {{prod.title}}</h4>
+            <h4>$ {{prod.price}}</h4>
+        </div>
+        <form method="post" action="/api/carrito/productos">
+            <div class="container container-btn bordes">
+                <select name="unidades" id="unidades">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="container container-btn bordes">
+
+                <input name="idprod" id="idprod" value="{{prod.id}}" type="hidden">
+                <input name="thumbnail" id="thumbnailprod" value="{{prod.thumbnail}}" type="hidden">
+                <input name="title" id="titleprod" value="{{prod.title}}" type="hidden">
+                <input name="price" id="priceprod" value="{{prod.price}}" type="hidden">
+                <input name="idcarrito" id="idcarrito" value="{{id}}" type="hidden">
+
+                <button type="submit" id=""
+                    style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
+                    Agregar al carrito
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</body>
+
+</html>

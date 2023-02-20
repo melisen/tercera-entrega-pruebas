@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+
+    <link rel="stylesheet" href="./estilos.css" TYPE="text/css">
+
+</head>
+
+<body>
+    <header class="container-fluid" id="header">
+        <nav id="navbar">
+            <div class="container-fluid">
+
+                <ul style="display:flex; flex-direction:row; justify-content:space-around;">
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/api/productos">Administración</a>
+                    </li>
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/nuestros-productos/{{id}}">Nuestros Productos</a>
+                    </li>
+                    <!--
+                    <li class="btn-navbar">
+                        <a class="link-navbar" href="/api/carrito">Carrito</a>
+                    </li>
+                    -->
+                    <li class="btn-navbar">
+                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+
+
+    <div style="background-color:rgb(226, 225, 225); margin:10px; padding:20px; margin:20px;">
+        <h2 style="color:rgb(18, 18, 122); font-weight:bold;">Mi Carrito </h2>
+        <br />
+
+    </div>
+
+    <!--Agregarle el botón eliminar y que eso interactúe con el carrito en Mongo -->
+
+    <h1 style="color:rgb(57, 4, 90); margin:20px;" id="titulo-carrito">Mi Carrito</h1>
+    <table style="margin:20px; background-color:rgb(22, 22, 22); color:white;" height="400px">
+        <tr>
+            <th rowspan="3" colspan="15">Imagen</th>
+            <th rowspan="3" colspan="15">Producto</th>
+            <th rowspan="3" colspan="15">Precio</th>
+            <th rowspan="3" colspan="15">Cantidad</th>
+            <th rowspan="3" colspan="15"></th>
+        </tr>
+        <tbody id="carrito">
+            {{#each productosMap}}
+            <tr>
+                <td rowspan="1" colspan="10" style="color:green; text-align:center; padding:5px;">
+                    <img src="{{this.thumbnail}}" </td>
+                <td rowspan="1" colspan="10" style="color:red; font-weight:bold; text-align:left; padding:5px; ">
+                    {{this.title}}
+                </td>
+                <td rowspan="1" colspan="20"
+                    style="color:rgb(127, 127, 5); font-weight:bold; text-align:center; padding:5px;">
+                    $ {{this.price}}
+                </td>
+                <td rowspan="1" colspan="20"
+                    style="color:rgb(127, 127, 5); font-weight:bold; text-align:center; padding:5px;">
+                    {{this.quantity}}
+                </td>
+                <td rowspan="1" colspan="20"
+                    style="color:rgb(127, 127, 5); font-weight:bold; text-align:center; padding:5px;">
+                    botón eliminar
+                </td>
+
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</body>
+
+</html>
