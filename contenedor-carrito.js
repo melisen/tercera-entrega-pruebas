@@ -82,9 +82,14 @@ class ContenedorCarrito{
     }
 
     async deleteProdDelCarrito(id, id_prod){
-      //$pull
       // interactuar con botón eliminar de la tabla del carrito
-
+      const carritoActualizado = await this.modelo.findOneAndUpdate(
+        { '_id': id }, 
+        { $pull: { productos: { _id: id_prod } } },
+        false, // Upsert
+        true, // Multi
+    );
+    return carritoActualizado
     }
 
     async deleteCarritoById(_id){

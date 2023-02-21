@@ -20,14 +20,21 @@
                     <li class="btn-navbar">
                         <a class="link-navbar" href="/api/productos">Administración</a>
                     </li>
+
                     <li class="btn-navbar">
-                        <a class="link-navbar" href="/nuestros-productos/{{id}}">Nuestros Productos</a>
+                        <form method="post" action="/seguir-comprando">
+                            <input name="id" value="{{id}}" type="hidden">
+                            <button type="submit">Seguir comprando</button>
+                        </form>
                     </li>
-                    <!--
                     <li class="btn-navbar">
-                        <a class="link-navbar" href="/api/carrito">Carrito</a>
+                        <form method="post" action="">
+                            <input name="id" value="{{id}}" type="hidden">
+                            <button type="submit">Confirmar pedido</button>
+                        </form>
                     </li>
-                    -->
+
+
                     <li class="btn-navbar">
                         <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
                     </li>
@@ -37,14 +44,6 @@
         </nav>
     </header>
 
-
-    <div style="background-color:rgb(226, 225, 225); margin:10px; padding:20px; margin:20px;">
-        <h2 style="color:rgb(18, 18, 122); font-weight:bold;">Mi Carrito </h2>
-        <br />
-
-    </div>
-
-    <!--Agregarle el botón eliminar y que eso interactúe con el carrito en Mongo -->
 
     <h1 style="color:rgb(57, 4, 90); margin:20px;" id="titulo-carrito">Mi Carrito</h1>
     <table style="margin:20px; background-color:rgb(22, 22, 22); color:white;" height="400px">
@@ -73,7 +72,12 @@
                 </td>
                 <td rowspan="1" colspan="20"
                     style="color:rgb(127, 127, 5); font-weight:bold; text-align:center; padding:5px;">
-                    botón eliminar
+
+                    <form method="delete" action="/api/carrito/productos">
+                        <input name="id" value="{{id}}" type="hidden">
+                        <input name="id_prod" value="{{this.id}}" type="hidden">
+                        <button type="submit">Eliminar</button>
+                    </form>
                 </td>
 
 

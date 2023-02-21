@@ -96,7 +96,7 @@ app.use(
 );
 
 
-//MONGO para models Usuarios y Productos
+
 mongoose
   .connect(DATABASEURL)
   .then(() => logger.log("info", "Connected to DB"))
@@ -208,6 +208,33 @@ function crearProductosRandom(){
     return listaProductos;
 }
 
+//NODEMAILER
+const createTransport = require('nodemailer');
+const transporter = createTransport({
+  service: 'gmail',
+  port: 587,
+  auth: {
+      user: 'melina.senorans@gmail.com',
+      pass: 'vrezoyzaszrufihs'
+  }
+});
+const mailOptions = {
+  from: 'Servidor Node.js',
+  to: TEST_MAIL,
+  subject: 'Mail de prueba desde Node.js',
+  html: '<h1 style="color: blue;">Contenido de prueba desde <span style="color: green;">Node.js con Nodemailer</span></h1>'
+}
+const enviarMail = async (options)=>{
+  try {
+    const info = await transporter.sendMail(options)
+    console.log(info)
+ } catch (err) {
+    console.log(err)
+ } 
+}
+//enviarMail(mailOptions)
+
+
 
 
 
@@ -240,11 +267,10 @@ app.get("/failsignup", routes.getFailsignup);
       res.redirect("/login");
     }
   }
-
-app.get("/nuestros-productos/:id", auth, async (req, res)=>{
+/*
+app.get("/nuestros-productos/", async (req, res)=>{
   try{
-    const {id} = req.params; //obtengo id del carrito
-    //buscar todos los productos y hacer un each. Sacarlos de index.js
+    const id = req.body;
     const productos = await Productos.listarTodos();
     const todosProd = productos.map( (item) => (
       {
@@ -253,23 +279,18 @@ app.get("/nuestros-productos/:id", auth, async (req, res)=>{
         price:item.price,
         thumbnail:item.thumbnail,
       }
-    ))  
-      res.render("nuestros-productos", {todosProd, id})
-      
-      logger.log("info", "/nuestros-productos - GET")
+    ))
+    logger.log("info", "/nuestros-productos - GET")  
+    res.render("nuestros-productos", {data: {todosProd, id}})
   }
   catch(err){
     logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
   }
-
 })
-
-
-
-
+*/
 app.post("/nuestros-productos", async (req, res)=>{
-  //hay que mandar el id del carrito para hacer el post a la ruta del carrito adecuado
-const {id} = req.body
+const {idcarrito} = req.body
+console.log("id en post /nuestros-productos, para ver las cards", idcarrito)
 const {idprod} = req.body;
 const producto = await Productos.buscarPorId(idprod);
 const prod = {
@@ -278,7 +299,7 @@ thumbnail: producto.thumbnail,
 price: producto.price,
 id: idprod
 }
-res.render("detalle-producto", {prod, id })
+res.render("detalle-producto", {data:{prod, idcarrito}})
 })
 
  
@@ -286,13 +307,42 @@ app.get('/api/carrito', auth, routesCarrito.getCrearCarrito)
 
 app.post('/api/carrito', auth, routesCarrito.postCrearCarrito)
 
-app.post('/api/carrito/productos', auth, routesCarrito.postCarrito)
+app.post('/api/carrito/productos', auth, routesCarrito.postAgregarProdCarrito)
 //agrega un producto al carrito desde card de producto
 
 app.get("/api/carrito/:id/productos", auth,  routesCarrito.getCarrito)
 //ver tabla de productos en el carrito
 
-app.delete('/api/carrito/:id/productos/:id_prod', auth, routesCarrito.deleteProdDelCarrito) 
+
+app.post("/seguir-comprando", async (req, res)=>{
+  const {id} = req.body
+  console.log("id body seguir comprando", id)
+  try{
+    const productos = await Productos.listarTodos();
+    const todosProd = productos.map( (item) => (
+      {
+        _id: item._id,
+        title:item.title,
+        price:item.price,
+        thumbnail:item.thumbnail,
+      }
+    ))
+    logger.log("info", "/seguir-comprando - POST")  
+    res.render("nuestros-productos", {data: {todosProd, id}})
+  }
+  catch(err){
+    logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
+  }
+})
+/*
+app.post("/ir-carrito", async (req, res)=>{
+  const {id} = req.body;
+  res.redirect(`/api/carrito/${id}/productos`, {id})
+})
+*/
+
+
+app.post('/api/carrito/productos', auth, routesCarrito.deleteProdDelCarrito) 
 //eliminar un producto del carrito
 
 app.delete('/api/carrito/:id', auth, routesCarrito.deleteCarrito)

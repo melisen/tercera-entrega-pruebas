@@ -37,11 +37,11 @@
 
     <div class="card">
         <div class="container-img bordes">
-            <img src="{{prod.thumbnail}}" alt="{{prod.title}}" class="img-card" />
+            <img src="{{data.prod.thumbnail}}" alt="{{data.prod.title}}" class="img-card" />
         </div>
         <div class="container bordes">
-            <h4> {{prod.title}}</h4>
-            <h4>$ {{prod.price}}</h4>
+            <h4> {{data.prod.title}}</h4>
+            <h4>$ {{data.prod.price}}</h4>
         </div>
         <form method="post" action="/api/carrito/productos">
             <div class="container container-btn bordes">
@@ -53,11 +53,11 @@
             </div>
             <div class="container container-btn bordes">
 
-                <input name="idprod" id="idprod" value="{{prod.id}}" type="hidden">
-                <input name="thumbnail" id="thumbnailprod" value="{{prod.thumbnail}}" type="hidden">
-                <input name="title" id="titleprod" value="{{prod.title}}" type="hidden">
-                <input name="price" id="priceprod" value="{{prod.price}}" type="hidden">
-                <input name="idcarrito" id="idcarrito" value="{{id}}" type="hidden">
+                <input name="idprod" id="idprod" value="{{data.prod.id}}" type="hidden">
+                <input name="thumbnail" id="thumbnailprod" value="{{data.prod.thumbnail}}" type="hidden">
+                <input name="title" id="titleprod" value="{{data.prod.title}}" type="hidden">
+                <input name="price" id="priceprod" value="{{data.prod.price}}" type="hidden">
+                <input name="idcarrito" id="idcarrito" value="{{data.idcarrito}}" type="hidden">
 
                 <button type="submit" id=""
                     style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
