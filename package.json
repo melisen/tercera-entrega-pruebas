@@ -26,6 +26,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "socket.io": "^4.5.4",
+    "twilio": "^4.7.2",
     "winston": "^3.8.2"
   }
 }

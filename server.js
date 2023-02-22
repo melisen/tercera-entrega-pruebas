@@ -31,6 +31,7 @@ let HOST = '0.0.0.0';
 
 
 
+
 //const argsPORT = parseArgs(process.argv.slice(2));
 //const PORT = process.argv[2];
 
@@ -102,7 +103,7 @@ mongoose
   .then(() => logger.log("info", "Connected to DB"))
   .catch((e) => {
     console.error(e);
-    throw "cannot connect to mongo";
+    throw "cannot connect to DB";
   });
 
 
@@ -208,31 +209,7 @@ function crearProductosRandom(){
     return listaProductos;
 }
 
-//NODEMAILER
-const createTransport = require('nodemailer');
-const transporter = createTransport({
-  service: 'gmail',
-  port: 587,
-  auth: {
-      user: 'melina.senorans@gmail.com',
-      pass: 'vrezoyzaszrufihs'
-  }
-});
-const mailOptions = {
-  from: 'Servidor Node.js',
-  to: TEST_MAIL,
-  subject: 'Mail de prueba desde Node.js',
-  html: '<h1 style="color: blue;">Contenido de prueba desde <span style="color: green;">Node.js con Nodemailer</span></h1>'
-}
-const enviarMail = async (options)=>{
-  try {
-    const info = await transporter.sendMail(options)
-    console.log(info)
- } catch (err) {
-    console.log(err)
- } 
-}
-//enviarMail(mailOptions)
+
 
 
 
@@ -290,7 +267,6 @@ app.get("/nuestros-productos/", async (req, res)=>{
 */
 app.post("/nuestros-productos", async (req, res)=>{
 const {idcarrito} = req.body
-console.log("id en post /nuestros-productos, para ver las cards", idcarrito)
 const {idprod} = req.body;
 const producto = await Productos.buscarPorId(idprod);
 const prod = {
@@ -342,13 +318,14 @@ app.post("/ir-carrito", async (req, res)=>{
 */
 
 
-app.post('/api/carrito/productos', auth, routesCarrito.deleteProdDelCarrito) 
+app.delete('/api/carrito/productos', auth, routesCarrito.deleteProdDelCarrito) 
 //eliminar un producto del carrito
 
 app.delete('/api/carrito/:id', auth, routesCarrito.deleteCarrito)
 //eliminar carrito
   
-  
+app.post('/api/carrito/confirmar-pedido', auth, routesCarrito.confirmarPedido)
+
   
   app.get("/api/productos", auth, async (req, res)=>{
     const { username, password, nombre } = req.user;

@@ -146,3 +146,10 @@
 {"level":"error","message":"no se pudo agregar producto al carrito existente"}
 {"level":"error","message":"no se pudo agregar producto al carrito existente"}
 {"level":"error","message":"no se pudo agregar producto al carrito existente"}
+{"code":"EENVELOPE","command":"API","level":"error"}
+{"code":"EENVELOPE","command":"API","level":"error"}
+{"level":"error","message":"User already exists"}
+{"code":"EENVELOPE","command":"API","level":"error"}
+{"code":"EENVELOPE","command":"API","level":"error"}
+{"code":"EENVELOPE","command":"API","level":"error"}
+{"code":"EENVELOPE","command":"API","level":"error"}

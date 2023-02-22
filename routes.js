@@ -1,4 +1,6 @@
 const logger = require("./winston-logger");
+const {enviarMail, transporter, mailADMIN} = require("./nodemailer")
+
 
 
 
@@ -21,10 +23,28 @@ function getRoot(req, res) {
     }
   }
 
-  function postSignup(req, res) {
+  async function postSignup(req, res) {
     logger.log("info", "/signup - POST")
     const {  username, password, nombre, apellido, direccion, edad, telefono, avatar } = req.user;
     const user = {  username, password, nombre, apellido, direccion, edad, telefono, avatar };
+    const mailOptionsNuevoReg = {
+      from: 'App Tienda',
+      to: mailADMIN,
+      subject: 'Nuevo registro',
+      html: `<div>
+            <p>Nuevo usuario registrado:</p>
+              <ul>
+                <li>Nombre: ${user.nombre} </li>
+                <li>Apellido: ${user.apellido} </li>
+                <li>>Email: ${user.username}</li> 
+                <li>Edad: ${user.edad}</li>  
+                <li>Dirección: ${user.direccion}</li>  
+                <li>Teléfono: ${user.telefono}</li> 
+                <li> <img src=" ${user.avatar}" alt=" ${user.nombre}" /> </li> 
+              </ul>
+              </div>`
+    }
+    const emailReg = await enviarMail(mailOptionsNuevoReg)
     res.render("profileUser", { user });
   }
 
