@@ -3,7 +3,8 @@ const logger = require("./winston-logger");
 //TWILIO SMS
 const twilio = require("twilio")
 const accountSid = 'AC9f0100a4191e83d52be74ccf5cfd1a0c'
-const authToken = '123d16c85dc536a887b3694942445efc'
+const authToken = '084387c819984a026f60e108f4a7a84e'
+
 const client = twilio(accountSid, authToken)
 
 /*
@@ -14,6 +15,7 @@ const mensaje = {
     to: 'telADMIN'
  }
  */
+const telADMIN = '+5491127204753'
 async function enviarSMS(mensaje){
     try {
         const message = await client.messages.create(mensaje)
@@ -24,8 +26,10 @@ async function enviarSMS(mensaje){
 }
 
 //TWILIO WHATSAPP
-const telADMIN = 'whatsapp:+5491127204753'
+const whatsappADMIN = 'whatsapp:+5491127204753'
 const numeroSandbox = 'whatsapp:+14155238886'
+
+ 
 
 /*
 EJ PARAMETRO DE clientWhatsapp.messages.create()
@@ -44,7 +48,7 @@ async function enviarWhatsapp(mensajeWhats){
  }
 }
 
-module.exports = {enviarSMS, enviarWhatsapp, client, telADMIN, numeroSandbox}
+module.exports = {enviarSMS, enviarWhatsapp, client, telADMIN, whatsappADMIN, numeroSandbox}
 
 
 

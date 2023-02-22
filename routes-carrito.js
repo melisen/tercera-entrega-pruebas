@@ -15,15 +15,15 @@ const ContenedorMongoDB = require("./ContenedorMongoDB.js");
 const ProdModel = require("./models/productos")
 const Productos = new ContenedorMongoDB(DATABASEURL, ProdModel);
 
-const {enviarSMS, enviarWhatsapp, client, telADMIN, numeroSandbox} = require("./twilio")
+const {enviarSMS, enviarWhatsapp, client, telADMIN, whatsappADMIN, numeroSandbox} = require("./twilio")
 const {enviarMail, transporter, mailADMIN} = require("./nodemailer")
+const Usuarios = require("./models/usuarios")
 
-const getCrearCarrito =async (req, res)=>{
-res.render("crear-carrito")
-}
+
 
 const postCrearCarrito = async (req, res)=>{
-  //viene de "Crear nuevo carrito" en vista de Nuestros Productos
+  //viene de "Crear nuevo carrto" en vista de Nuestros Productos
+
   const id = await Carritos.crearCarritoVacio();
   try{
     const productos = await Productos.listarTodos();
@@ -54,6 +54,7 @@ const postAgregarProdCarrito =  async (req, res)=>{
   }
 
   const idcarrito = req.body.idcarrito;
+  const {username} = req.body;
 
   
     //toma el id del carrito, si lo hay, y agrega el producto. Si no hay un params de id, crea un carrito con el prod incorporado
@@ -63,7 +64,7 @@ const postAgregarProdCarrito =  async (req, res)=>{
           {_id: idcarrito},
           { $push: {productos: objetoProd}},
           { new: true}) 
-        res.redirect(`/api/carrito/${idcarrito}/productos`)
+        res.redirect(`/api/carrito/${idcarrito}/productos/${username}`)
       }
       //const carritoActualizado = await Carritos.incorporarProdAlCarrito(carritoActualID, objetoProd)
       catch(err){
@@ -87,6 +88,7 @@ const postAgregarProdCarrito =  async (req, res)=>{
 
 const  getCarrito = async (req, res) => {
   const {id} = req.params;
+  const {username} = req.params;
   const idcarrito = id
   const prodCarrito = await CarritoModel.findOne({_id: id});
   const productos = prodCarrito.productos;
@@ -98,7 +100,7 @@ const  getCarrito = async (req, res) => {
       quantity:item.quantity,
     }
   ))
-  res.render("carrito", {productosMap, idcarrito});
+  res.render("carrito", {productosMap, idcarrito, username});
 }
 
 
@@ -106,6 +108,7 @@ const  getCarrito = async (req, res) => {
 const deleteProdDelCarrito =  async (req, res)=>{
   const {id} = req.body;
   const {id_prod} = req.body;
+  
   let carritoSinProducto = await Carritos.deleteProdDelCarrito(id, id_prod);
   const productos = carritoSinProducto.productos;
   console.log("carritoSinProducto.productos", carritoSinProducto.productos)
@@ -130,12 +133,24 @@ const deleteCarrito =  async (req, res)=>{
 
 
 const confirmarPedido = async (req, res)=>{
-  const { username, telefono, nombre } = req.user;
-  const user = { username, telefono, nombre };
+  const {username} = req.user;
+  const usuario = await Usuarios.findOne({username: username})
+  const user = {
+    username:usuario.username,
+    password:usuario.password, 
+    telefono:usuario.telefono, 
+    nombre:usuario.nombre, 
+    apellido:usuario.apellido, 
+    avatar:usuario.avatar, 
+    edad:usuario.edad, 
+    direccion:usuario.direccion
+    }  //buscar el user en la base de datos y extraer el dato telefono
+
   const carritoID = req.body.idcarrito;
+  
 
   //NODEMAILER al ADMIN
-  logger.log("info", "carritoID", carritoID)
+  logger.log("info",  carritoID)
   const prodCarrito = await CarritoModel.findOne({_id: carritoID});
   const productos = prodCarrito.productos;
   const listaPedido = productos.map( (item) => (
@@ -163,12 +178,13 @@ const confirmarPedido = async (req, res)=>{
       { 
          body: whatsappBody, 
          from: numeroSandbox,       
-         to: telADMIN
+         to: whatsappADMIN
        }
-  //const whatsPedido = await enviarWhatsapp(whatsappMensaje);
+  const whatsPedido = await enviarWhatsapp(whatsappMensaje);
   
 
   //TWILIO SMS al USER
+  
   const telUSER = user.telefono;
   const mensajeTwilio = {
     body: `Su pedido ${carritoID} ha sido recibido y se encuentra en proceso`,
@@ -181,7 +197,6 @@ const confirmarPedido = async (req, res)=>{
 }
 
 module.exports = {
-  getCrearCarrito,
   postCrearCarrito,
   getCarrito,
   postAgregarProdCarrito,

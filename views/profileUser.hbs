@@ -20,7 +20,13 @@
                     </li>
 
                     <li class="btn-navbar">
-                        <a class="link-navbar" href="/api/carrito">Crear Carrito</a>
+                        <form method="post" action="/api/carrito">
+                            <input name="username" value="{{user.username}}" type="hidden">
+                            <button type="submit" id="">
+
+                                Crear Carrito
+                            </button>
+                        </form>
                     </li>
                     <li class="btn-navbar">
                         <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>

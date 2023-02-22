@@ -55,6 +55,8 @@ const ContenedorFS =  require('./contenedor-fs.js');
 const mensajesFS = new ContenedorFS('./mensajes.json')
 
 
+
+
 app.use(express.static('views'));
 
 //*HANDLEBARS
@@ -268,6 +270,7 @@ app.get("/nuestros-productos/", async (req, res)=>{
 app.post("/nuestros-productos", async (req, res)=>{
 const {idcarrito} = req.body
 const {idprod} = req.body;
+
 const producto = await Productos.buscarPorId(idprod);
 const prod = {
 title: producto.title,
@@ -279,14 +282,14 @@ res.render("detalle-producto", {data:{prod, idcarrito}})
 })
 
  
-app.get('/api/carrito', auth, routesCarrito.getCrearCarrito)
+
 
 app.post('/api/carrito', auth, routesCarrito.postCrearCarrito)
 
 app.post('/api/carrito/productos', auth, routesCarrito.postAgregarProdCarrito)
 //agrega un producto al carrito desde card de producto
 
-app.get("/api/carrito/:id/productos", auth,  routesCarrito.getCarrito)
+app.get("/api/carrito/:id/productos/:username", auth,  routesCarrito.getCarrito)
 //ver tabla de productos en el carrito
 
 

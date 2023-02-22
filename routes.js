@@ -82,7 +82,6 @@ async function postLogin(req, res){
     edad:usuario.edad, 
     direccion:usuario.direccion
   }
-  console.log(user.apellido)
   res.render("profileUser", { user });
   logger.log("info", "/login - POST - render profileUser")
 }
