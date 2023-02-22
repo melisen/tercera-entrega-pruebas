@@ -15,7 +15,7 @@ const ContenedorMongoDB = require("./ContenedorMongoDB.js");
 const ProdModel = require("./models/productos")
 const Productos = new ContenedorMongoDB(DATABASEURL, ProdModel);
 
-const {enviarSMS, client} = require("./twilio")
+const {enviarSMS, enviarWhatsapp, client, telADMIN, numeroSandbox} = require("./twilio")
 const {enviarMail, transporter, mailADMIN} = require("./nodemailer")
 
 const getCrearCarrito =async (req, res)=>{
@@ -159,10 +159,17 @@ const confirmarPedido = async (req, res)=>{
 
   //TWILIO WHATSAPP al ADMIN
   const whatsappBody = `Nuevo pedido de ${user.nombre} ( ${user.username} )`
+  const whatsappMensaje = 
+      { 
+         body: whatsappBody, 
+         from: numeroSandbox,       
+         to: telADMIN
+       }
+  //const whatsPedido = await enviarWhatsapp(whatsappMensaje);
+  
 
   //TWILIO SMS al USER
   const telUSER = user.telefono;
-
   const mensajeTwilio = {
     body: `Su pedido ${carritoID} ha sido recibido y se encuentra en proceso`,
     from: '+12707137190',

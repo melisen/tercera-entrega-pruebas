@@ -1,4 +1,5 @@
 const logger = require("./winston-logger");
+const Usuarios = require("./models/usuarios")
 const {enviarMail, transporter, mailADMIN} = require("./nodemailer")
 
 
@@ -58,8 +59,8 @@ function getRoot(req, res) {
   function getLogin(req, res) {
     logger.log("info", "/login - GET")
     if (req.isAuthenticated()) {
-        const { username, password } = req.user;
-        const user = { username, password };
+        const { username, password, telefono, nombre, apellido, avatar, edad, direccion  } = req.user;
+        const user = { username, password, telefono, nombre, apellido, avatar, edad, direccion  };
         res.render("profileUser", { user });
       } else {
         res.render("login");
@@ -68,9 +69,20 @@ function getRoot(req, res) {
 
 
 
-function postLogin(req, res){
+async function postLogin(req, res){
     const { username, password } = req.user;
-  const user = { username, password };
+  const usuario = await Usuarios.findOne({username: username})
+  const user = {
+    username:usuario.username,
+    password:usuario.password, 
+    telefono:usuario.telefono, 
+    nombre:usuario.nombre, 
+    apellido:usuario.apellido, 
+    avatar:usuario.avatar, 
+    edad:usuario.edad, 
+    direccion:usuario.direccion
+  }
+  console.log(user.apellido)
   res.render("profileUser", { user });
   logger.log("info", "/login - POST - render profileUser")
 }
