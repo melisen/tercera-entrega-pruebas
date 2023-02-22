@@ -127,3 +127,9 @@
 {"code":20003,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/20003","status":401}
 {"code":20003,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/20003","status":401}
 {"level":"error"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"Error in Saving user in Usuarios "}

@@ -9,12 +9,12 @@ const DATABASEURL = process.env.DATABASEURL;
 const ContenedorCarrito = require('./contenedor-carrito');
 const CarritoModel = require("./models/carrito")
 const rutaConnect = DATABASEURL;
-const Carritos = new ContenedorCarrito(rutaConnect, CarritoModel);
+const Carritos = new ContenedorCarrito(rutaConnect, );
 
 const ContenedorMongoDB = require("./ContenedorMongoDB.js");
 const ProdModel = require("./models/productos")
 const Productos = new ContenedorMongoDB(DATABASEURL, ProdModel);
-
+CarritoModel
 const {enviarSMS, enviarWhatsapp, client, telADMIN, whatsappADMIN, numeroSandbox} = require("./twilio")
 const {enviarMail, transporter, mailADMIN} = require("./nodemailer")
 const Usuarios = require("./models/usuarios")
@@ -24,8 +24,19 @@ const Usuarios = require("./models/usuarios")
 const postCrearCarrito = async (req, res)=>{
   //viene de "Crear nuevo carrto" en vista de Nuestros Productos
 
-  const id = await Carritos.crearCarritoVacio();
   try{
+    const nuevoCarrito = new CarritoModel({
+      productos: []
+    });
+
+    const objCarrito = await nuevoCarrito.save()
+    const id =  objCarrito._id
+    const {username} = req.user;    
+    const carritoAlUser = await Usuarios.findOneAndUpdate(
+      {username: username},
+      { $set: {carritoactual: id}})
+      // The $set operator replaces the value of a field with the specified value. 
+      // para cambiar si fuera un array de ids de carritos -->{ $push: {carritos: objCarrito._id}})      
     const productos = await Productos.listarTodos();
     const todosProd = productos.map( (item) => (
       {
@@ -36,59 +47,64 @@ const postCrearCarrito = async (req, res)=>{
       }
     ))
     logger.log("info", "/api/carrito - POST")  
-    res.render("nuestros-productos", {data: {todosProd, id}})
+    res.render("nuestros-productos", {data: {todosProd, id}})    
   }
   catch(err){
     logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
   }
-  //res.redirect(`/nuestros-productos/${id}`)
 }
 
 const postAgregarProdCarrito =  async (req, res)=>{
   const objetoProd = {
-    id:req.body.idprod,
+    _id:req.body.idprod,
     title: req.body.title,
     price: req.body.price,
     thumbnail: req.body.thumbnail,
     quantity: req.body.unidades
   }
 
-  const idcarrito = req.body.idcarrito;
-  const {username} = req.body;
-
-  
-    //toma el id del carrito, si lo hay, y agrega el producto. Si no hay un params de id, crea un carrito con el prod incorporado
-    if(idcarrito){
-      try{
-        const carritoActualizado = await CarritoModel.findOneAndUpdate(
+      
+      const {username} = req.user;
+      const usuario = await Usuarios.findOne({username: username})
+      const idcarrito = usuario.carritoactual;      
+      const carrito = await CarritoModel.findOne({_id: idcarrito})
+      const arrProductos = carrito.productos;   
+      const estaProducto = arrProductos.find(element => element._id == objetoProd._id)
+      
+      if(estaProducto){   
+        let cantPrevia = parseInt(estaProducto.quantity);
+        let cantSumar = parseInt(objetoProd.quantity)  
+        const nuevaCant = cantPrevia + cantSumar;
+        arrProductos.find(element => element._id == objetoProd._id).quantity = nuevaCant
+        const cantActualizada = await CarritoModel.findOneAndUpdate(
           {_id: idcarrito},
-          { $push: {productos: objetoProd}},
+          { $set: {productos: arrProductos}},
           { new: true}) 
-        res.redirect(`/api/carrito/${idcarrito}/productos/${username}`)
+          //const importeTotal = arrProductos.reduce((acc, elemento) => acc + elemento.price*elemento.quantity, 0)
+          //logger.log("info", "importeTotal", importeTotal)
+          res.redirect(`/api/carrito/${idcarrito}/productos/`)
+      } else{
+        try{
+          const carritoActualizado = await CarritoModel.findOneAndUpdate(
+            {_id: idcarrito},
+            { $push: {productos: objetoProd}},
+            { new: true}) 
+          res.redirect(`/api/carrito/${idcarrito}/productos/`)
+        }
+        catch(err){
+          logger.log("error", "no se pudo agregar producto al carrito existente")
+        }
       }
-      //const carritoActualizado = await Carritos.incorporarProdAlCarrito(carritoActualID, objetoProd)
-      catch(err){
-        logger.log("error", "no se pudo agregar producto al carrito existente")
-      }
-    }
-        /*  
-     else{
-      try{
-        const id = await Carritos.crearCarrito(objetoProd);
-        res.redirect(`/api/carrito/${id}/productos`)
-      }
-      catch(err){
-        logger.log("error", "no se pudo crear nuevo carrito agregando producto ")
-      }
-      }     
-      */
-}
+      
+      
+      
+  }
 
 
 
 const  getCarrito = async (req, res) => {
   const {id} = req.params;
-  const {username} = req.params;
+  const {username} = req.user;
   const idcarrito = id
   const prodCarrito = await CarritoModel.findOne({_id: id});
   const productos = prodCarrito.productos;

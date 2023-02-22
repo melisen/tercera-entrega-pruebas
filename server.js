@@ -167,7 +167,8 @@ passport.use(
           edad: req.body.edad,
           direccion: req.body.direccion,
           telefono: req.body.telefono,
-          avatar: req.body.avatar
+          avatar: req.body.avatar,
+          carritoactual: "vacio"
         };
         Usuarios.create(newUser, (err, userWithId) => {
           if (err) {
@@ -246,29 +247,8 @@ app.get("/failsignup", routes.getFailsignup);
       res.redirect("/login");
     }
   }
-/*
-app.get("/nuestros-productos/", async (req, res)=>{
-  try{
-    const id = req.body;
-    const productos = await Productos.listarTodos();
-    const todosProd = productos.map( (item) => (
-      {
-        _id: item._id,
-        title:item.title,
-        price:item.price,
-        thumbnail:item.thumbnail,
-      }
-    ))
-    logger.log("info", "/nuestros-productos - GET")  
-    res.render("nuestros-productos", {data: {todosProd, id}})
-  }
-  catch(err){
-    logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
-  }
-})
-*/
+
 app.post("/nuestros-productos", async (req, res)=>{
-const {idcarrito} = req.body
 const {idprod} = req.body;
 
 const producto = await Productos.buscarPorId(idprod);
@@ -278,7 +258,7 @@ thumbnail: producto.thumbnail,
 price: producto.price,
 id: idprod
 }
-res.render("detalle-producto", {data:{prod, idcarrito}})
+res.render("detalle-producto", {data:{prod}})
 })
 
  
@@ -289,13 +269,11 @@ app.post('/api/carrito', auth, routesCarrito.postCrearCarrito)
 app.post('/api/carrito/productos', auth, routesCarrito.postAgregarProdCarrito)
 //agrega un producto al carrito desde card de producto
 
-app.get("/api/carrito/:id/productos/:username", auth,  routesCarrito.getCarrito)
+app.get("/api/carrito/:id/productos/", auth,  routesCarrito.getCarrito)
 //ver tabla de productos en el carrito
 
 
-app.post("/seguir-comprando", async (req, res)=>{
-  const {id} = req.body
-  console.log("id body seguir comprando", id)
+app.get("/seguir-comprando", async (req, res)=>{     
   try{
     const productos = await Productos.listarTodos();
     const todosProd = productos.map( (item) => (
@@ -306,8 +284,8 @@ app.post("/seguir-comprando", async (req, res)=>{
         thumbnail:item.thumbnail,
       }
     ))
-    logger.log("info", "/seguir-comprando - POST")  
-    res.render("nuestros-productos", {data: {todosProd, id}})
+    logger.log("info", "/seguir-comprando - GET")  
+    res.render("nuestros-productos", {data: {todosProd}})
   }
   catch(err){
     logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
