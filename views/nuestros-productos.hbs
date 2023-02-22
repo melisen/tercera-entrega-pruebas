@@ -39,37 +39,32 @@
         </nav>
     </header>
 
-
-
     <div>
         <h2 class="link-navbar" style="margin:20px;">Nuestros productos</h2>
 
-        <form method="post" action="/nuestros-productos">
-
-            {{#each data.todosProd}}
-            <div class="card">
-                <div class="container-img">
-                    <img src="{{this.thumbnail}}" alt="{{this.title}}" class="img-card" />
-                </div>
-                <div class="container">
-                    <h4>{{this.title}}</h4>
-                    <h4>$ {{this.price}}</h4>
-                </div>
-                <div class="container container-btn">
-
-
+        {{#each data.todosProd}}
+        <div class="card">
+            <div class="container-img">
+                <img src="{{this.thumbnail}}" alt="{{this.title}}" class="img-card" />
+            </div>
+            <div class="container">
+                <h4>{{this.title}}</h4>
+                <h4>$ {{this.price}}</h4>
+            </div>
+            <div class="container container-btn">
+                <form method="post" action="/nuestros-productos">
                     <input name="idprod" id="idprod" value="{{this._id}}" type="hidden">
-
-
                     <button type="submit" id=""
                         style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
                         Ver detalle
                     </button>
-        </form>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+
     </div>
-    </div>
-    </div>
-    {{/each}}
+
 
 
 
