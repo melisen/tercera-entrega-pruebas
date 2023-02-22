@@ -2,8 +2,8 @@ const logger = require("./winston-logger");
 
 //TWILIO SMS
 const twilio = require("twilio")
-const accountSid = 'AC9f0100a4191e83d52be74ccf5cfd1a0c'
-const authToken = '084387c819984a026f60e108f4a7a84e'
+const accountSid = process.env.ACCOUNTSIDTWILIO
+const authToken = process.env.AUTHTOKENTWILIO
 
 const client = twilio(accountSid, authToken)
 
