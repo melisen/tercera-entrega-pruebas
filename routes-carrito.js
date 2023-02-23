@@ -61,9 +61,7 @@ const postAgregarProdCarrito =  async (req, res)=>{
     price: req.body.price,
     thumbnail: req.body.thumbnail,
     quantity: req.body.unidades
-  }
-
-      
+  }      
       const {username} = req.user;
       const usuario = await Usuarios.findOne({username: username})
       const idcarrito = usuario.carritoactual;      
@@ -110,6 +108,7 @@ const  getCarrito = async (req, res) => {
   const productos = prodCarrito.productos;
   const productosMap = productos.map( (item) => (
     {
+      _id: item._id,
       title:item.title,
       price:item.price,
       thumbnail:item.thumbnail,
@@ -122,28 +121,43 @@ const  getCarrito = async (req, res) => {
 
 
 const deleteProdDelCarrito =  async (req, res)=>{
-  const {id} = req.body;
-  const {id_prod} = req.body;
-  
-  let carritoSinProducto = await Carritos.deleteProdDelCarrito(id, id_prod);
-  const productos = carritoSinProducto.productos;
-  console.log("carritoSinProducto.productos", carritoSinProducto.productos)
-  const productosMap = productos.map( (item) => (
-    {
-      title:item.title,
-      price:item.price,
-      thumbnail:item.thumbnail,
-      quantity:item.quantity,
-    }
-  ))
-  res.render("carrito", {productosMap, id});
-
-
+  const {idprod} = req.body;
+  const {username} = req.user;
+  const usuario = await Usuarios.findOne({username: username})
+  const idcarrito = usuario.carritoactual;  
+  const carrito = await CarritoModel.findOne({_id: idcarrito})
+      const arrProductos = carrito.productos; 
+      try{
+        const nuevoArr = arrProductos.filter(element => element._id != idprod)
+        logger.log("info", nuevoArr)
+        const carritoActualizado = await CarritoModel.findOneAndUpdate(
+          {_id: idcarrito},
+          { $set: {productos: nuevoArr}},
+          { new: true}) 
+      }        
+        catch(err){
+          logger.log("error", "no se pudo eliminar producto del carrito ")
+        }
+        
+  /*
+  let carritoSinProducto = await CarritoModel.updateOne(
+    { _id: idcarrito }, 
+    { $pull: { productos: { _id: id_prod } } },
+    { new: true}
+  )
+  */
+  res.redirect("/ver-carrito")
 }
 
 const deleteCarrito =  async (req, res)=>{
-  const {id} = req.params
-  let carritoEliminado = await Carritos.deleteCarritoById(id)
+  const {username} = req.user;
+  const usuario = await Usuarios.findOne({username: username})
+  const idcarrito = usuario.carritoactual; 
+  let carritoEliminado = await CarritoModel.deleteOne({ _id: idcarrito })
+  const carritoAlUser = await Usuarios.findOneAndUpdate(
+    {username: username},
+    { $set: {carritoactual: "vacío"}})
+    res.redirect("/login")
 
 }
 

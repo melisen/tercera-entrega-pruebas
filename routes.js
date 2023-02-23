@@ -80,9 +80,10 @@ async function postLogin(req, res){
     apellido:usuario.apellido, 
     avatar:usuario.avatar, 
     edad:usuario.edad, 
-    direccion:usuario.direccion
+    direccion:usuario.direccion,
+    carritoactual: usuario.carritoactual
   }
-  res.render("profileUser", { user });
+  res.render("profileUser", { user});
   logger.log("info", "/login - POST - render profileUser")
 }
 

@@ -18,18 +18,9 @@
                     <li class="btn-navbar">
                         <a class="link-navbar" href="/api/productos">Administración</a>
                     </li>
-
-                    <!--
                     <li class="btn-navbar">
-                        <form method="post" action="/ir-carrito">
-                            <input name="id" value="{{id}}" type="hidden">
-                            <button type="submit">Carrito</button>
-                        </form>
-                        
+                        <a class="link-navbar" href="/ver-carrito">Ver Carrito</a>
                     </li>
-                    -->
-
-
                     <li class="btn-navbar">
                         <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
                     </li>
@@ -43,7 +34,15 @@
         <h2 class="link-navbar" style="margin:20px;">Nuestros productos</h2>
 
         {{#each data.todosProd}}
-        <div class="card">
+        <div class="card" style="box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
+            transition:0.3s;
+            text-align:center;
+            padding:1rem;
+            margin:1rem 0.5rem; 
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items:center;">
             <div class="container-img">
                 <img src="{{this.thumbnail}}" alt="{{this.title}}" class="img-card" />
             </div>

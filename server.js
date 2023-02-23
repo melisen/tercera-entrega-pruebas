@@ -57,7 +57,7 @@ const mensajesFS = new ContenedorFS('./mensajes.json')
 
 
 
-app.use(express.static('views'));
+app.use(express.static((__dirname,'views')));
 
 //*HANDLEBARS
 app.set('views', './views/')
@@ -168,7 +168,7 @@ passport.use(
           direccion: req.body.direccion,
           telefono: req.body.telefono,
           avatar: req.body.avatar,
-          carritoactual: "vacio"
+          carritoactual: "vacío"
         };
         Usuarios.create(newUser, (err, userWithId) => {
           if (err) {
@@ -269,40 +269,50 @@ app.post('/api/carrito', auth, routesCarrito.postCrearCarrito)
 app.post('/api/carrito/productos', auth, routesCarrito.postAgregarProdCarrito)
 //agrega un producto al carrito desde card de producto
 
+app.get("/ver-carrito", async (req, res)=>{
+      const {username} = req.user;
+      const usuario = await Usuarios.findOne({username: username})
+      const idcarrito = usuario.carritoactual;   
+      res.redirect(`/api/carrito/${idcarrito}/productos/`)
+})
+
+
 app.get("/api/carrito/:id/productos/", auth,  routesCarrito.getCarrito)
 //ver tabla de productos en el carrito
 
 
-app.get("/seguir-comprando", async (req, res)=>{     
-  try{
-    const productos = await Productos.listarTodos();
-    const todosProd = productos.map( (item) => (
-      {
-        _id: item._id,
-        title:item.title,
-        price:item.price,
-        thumbnail:item.thumbnail,
-      }
-    ))
-    logger.log("info", "/seguir-comprando - GET")  
-    res.render("nuestros-productos", {data: {todosProd}})
+app.get("/seguir-comprando", async (req, res)=>{    
+  const {username} = req.user;
+      const usuario = await Usuarios.findOne({username: username})
+      const haycarrito = usuario.carritoactual;   
+  if(haycarrito == "vacío"){
+    res.redirect("/api/carrito")
+  }else{
+    try{
+      const productos = await Productos.listarTodos();
+      const todosProd = productos.map( (item) => (
+        {
+          _id: item._id,
+          title:item.title,
+          price:item.price,
+          thumbnail:item.thumbnail,
+        }
+      ))
+      logger.log("info", "/seguir-comprando - GET")  
+      res.render("nuestros-productos", {data: {todosProd}})
+    }
+    catch(err){
+      logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
+    }
   }
-  catch(err){
-    logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
-  }
-})
-/*
-app.post("/ir-carrito", async (req, res)=>{
-  const {id} = req.body;
-  res.redirect(`/api/carrito/${id}/productos`, {id})
-})
-*/
 
 
-app.delete('/api/carrito/productos', auth, routesCarrito.deleteProdDelCarrito) 
+})
+
+app.post('/api/carrito/productos/del', auth, routesCarrito.deleteProdDelCarrito) 
 //eliminar un producto del carrito
 
-app.delete('/api/carrito/:id', auth, routesCarrito.deleteCarrito)
+app.delete('/api/carrito', auth, routesCarrito.deleteCarrito)
 //eliminar carrito
   
 app.post('/api/carrito/confirmar-pedido', auth, routesCarrito.confirmarPedido)

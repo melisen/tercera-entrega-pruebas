@@ -21,11 +21,18 @@
                     <li class="btn-navbar">
                         <a class="link-navbar" href="/nuestros-productos">Nuestros Productos</a>
                     </li>
-                    <li class="btn-navbar">
-                        <a class="link-navbar" href="/api/carrito">Carrito</a>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <a class="link-navbar"
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                            href="/ver-carrito">Ver Carrito</a>
                     </li>
-                    <li class="btn-navbar">
-                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <button
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.2rem; background-color:white; border-width:0;">
+                            <a class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                                href="/logout">Cerrar sesión</a></button>
                     </li>
                 </ul>
 
@@ -35,7 +42,15 @@
 
     <!-- server mande a esta vista de handlebars el objeto prod y rellenar campos-->
 
-    <div class="card">
+    <div class="card" style="box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
+    transition:0.3s;
+    text-align:center;
+    padding:1rem;
+    margin:1rem 0.5rem; 
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;">
         <div class="container-img bordes">
             <img src="{{data.prod.thumbnail}}" alt="{{data.prod.title}}" class="img-card" />
         </div>

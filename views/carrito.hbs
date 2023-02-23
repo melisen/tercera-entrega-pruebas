@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil</title>
-
-    <link rel="stylesheet" href="./estilos.css" TYPE="text/css">
-
+    <title>Carrito</title>
+    <link rel="stylesheet" href="./estilos.css">
 </head>
 
 <body>
@@ -17,26 +15,40 @@
             <div class="container-fluid">
 
                 <ul style="display:flex; flex-direction:row; justify-content:space-around;">
-                    <li class="btn-navbar">
-                        <a class="link-navbar" href="/api/productos">Administración</a>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <a class="link-navbar" href="/api/productos"
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.5rem;">Administración</a>
+                    </li>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <a class="link-navbar" href="/login"
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.5rem;">Mi
+                            Perfil</a>
                     </li>
 
-                    <li class="btn-navbar">
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
                         <form method="get" action="/seguir-comprando">
-                            <button type="submit">Seguir comprando</button>
+                            <button type="submit" class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.2rem; background-color:white; border-width:0;">
+                                Seguir comprando</button>
                         </form>
                     </li>
-                    <li class="btn-navbar">
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
                         <form method="post" action="/api/carrito/confirmar-pedido">
                             <input name="idcarrito" value="{{idcarrito}}" type="hidden">
                             <input name="username" value="{{username}}" type="hidden">
-                            <button type="submit">Confirmar pedido</button>
+                            <button type="submit" class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.2rem; background-color:white; border-width:0;">
+                                Confirmar pedido</button>
                         </form>
                     </li>
 
 
-                    <li class="btn-navbar">
-                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <button
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.2rem; background-color:white; border-width:0;">
+                            <a class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                                href="/logout">Cerrar sesión</a></button>
                     </li>
                 </ul>
 
@@ -46,7 +58,13 @@
 
 
     <h1 style="color:rgb(57, 4, 90); margin:20px;" id="titulo-carrito">Mi Carrito</h1>
-    <table style="margin:20px; background-color:rgb(22, 22, 22); color:white;" height="400px">
+    <form method="post" action="/api/carrito">
+        <input name="idcarrito" value="{{idcarrito}}" type="hidden">
+        <button type="submit" class="link-navbar"
+            style="font-size:1.3rem; color:rgb(200, 152, 207); background-color:rgb(18, 18, 18);">
+            Vaciar carrito</button>
+    </form>
+    <table style="margin:20px; background-color:rgb(178, 159, 181); color:rgb(45, 5, 52);" height="400px">
         <tr>
             <th rowspan="3" colspan="15">Imagen</th>
             <th rowspan="3" colspan="15">Producto</th>
@@ -57,13 +75,22 @@
         <tbody id="carrito">
             {{#each productosMap}}
             <tr>
-                <td rowspan="1" colspan="10" style="color:green; text-align:center; padding:5px;">
-                    <img src="{{this.thumbnail}}" </td>
-                <td rowspan="1" colspan="10" style="color:red; font-weight:bold; text-align:left; padding:5px; ">
+                <td rowspan="1" colspan="10" style="color:rgb(92, 0, 128); text-align:center; padding:5px;">
+                    <div style="width: 120px;
+    display:flex;
+    justify-content: center;
+    align-items:center;">
+                        <img src="{{this.thumbnail}}" style="max-height: 100%;
+    max-width: 100%;
+    border-radius: 5px 5px 0 0;" />
+                    </div>
+                </td>
+                <td rowspan="1" colspan="10"
+                    style="color:rgb(92, 0, 128); font-weight:bold; text-align:left; padding:5px; ">
                     {{this.title}}
                 </td>
                 <td rowspan="1" colspan="20"
-                    style="color:rgb(127, 127, 5); font-weight:bold; text-align:center; padding:5px;">
+                    style="color:rgb(92, 0, 128); font-weight:bold; text-align:center; padding:5px;">
                     $ {{this.price}}
                 </td>
                 <td rowspan="1" colspan="20"
@@ -73,14 +100,14 @@
                 <td rowspan="1" colspan="20"
                     style="color:rgb(127, 127, 5); font-weight:bold; text-align:center; padding:5px;">
 
-                    <form method="delete" action="/api/carrito/productos">
-                        <input name="id" value="{{idcarrito}}" type="hidden">
-                        <input name="id_prod" value="{{this.id}}" type="hidden">
-                        <button type="submit">Eliminar</button>
+                    <form method="post" action="/api/carrito/productos/del">
+                        <input name="idprod" id="idprod" value="{{this._id}}" type="hidden">
+                        <button type="submit" id=""
+                            style="color:white; background-color:rgb(63, 8, 63); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
+                            Eliminar
+                        </button>
                     </form>
                 </td>
-
-
             </tr>
             {{/each}}
         </tbody>

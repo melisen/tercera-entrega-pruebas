@@ -29,39 +29,6 @@ class ContenedorCarrito{
         return todos
     }
 
-    async crearCarritoVacio(){
-      try{
-        const nuevoCarrito = new this.modelo({
-          productos: []
-        });
-
-        const objCarrito = await nuevoCarrito.save() 
-        return objCarrito._id 
-      } catch(err){
-        logger.log("error", "error al crear carrito")      
-      }     
-    }
-      
-    async crearCarrito(objetoProd){
-      try{
-        const nuevoCarrito = new this.modelo({
-          productos: [objetoProd]
-        });
-
-        const objCarrito = await nuevoCarrito.save() 
-        return objCarrito._id 
-      } catch(err){
-        logger.log("error", "error al crear carrito")      
-      }      
-    }
-
-/*
-    async buscarUltimoCarrito(){
-        let ultimoCarritoID = await this.modelo.find({}).sort({_id: -1}).limit(1)
-        return ultimoCarritoID._id
-    }
-    */
-
     
     async buscarPorId(_id){
   const element = await this.modelo.findOne({_id: _id});
@@ -93,9 +60,7 @@ class ContenedorCarrito{
     }
     
 
-    async deleteCarritoById(_id){
 
-    }
 
 
     async borrarTodosLosCarritos(){ 

@@ -18,18 +18,24 @@
                     <li class="btn-navbar">
                         <a class="link-navbar" href="/api/productos">Administración</a>
                     </li>
-
                     <li class="btn-navbar">
+                        <a class="link-navbar" href="/ver-carrito">Ver Carrito</a>
+                    </li>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
                         <form method="post" action="/api/carrito">
                             <input name="username" value="{{user.username}}" type="hidden">
-                            <button type="submit" id="">
-
+                            <button type="submit" id="" class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.2rem; background-color:white; border-width:0;">
                                 Crear Carrito
                             </button>
                         </form>
                     </li>
-                    <li class="btn-navbar">
-                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <button
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140); font-size:1.2rem; background-color:white; border-width:0;">
+                            <a class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                                href="/logout">Cerrar sesión</a></button>
                     </li>
                 </ul>
 
