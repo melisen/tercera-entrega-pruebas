@@ -21,6 +21,14 @@
   <div style="background-color:rgb(226, 225, 225); margin:10px; padding:10px;">
     <form onsubmit="enviarProducto()">
       <h1 style="color:blue; font-weight:bold;">Ingrese producto:</h1>
+      <label for="category">Categoría:</label>
+      <select name="category" id="category">
+        <option value="multicolor">Multicolor</option>
+        <option value="blanco">Blanco</option>
+        <option value="negro">Negro</option>
+        <option value="rosa">Rosa</option>
+        <option value="azul">Azul</option>
+      </select><br>
       <label for="title">Nombre de producto:</label>
       <input type="text" id="title" name="title"><br>
       <label for="price">Precio:</label>
@@ -33,9 +41,10 @@
     <h1 style="color:brown;">Lista de Productos:</h1>
     <table style="margin:20px; background-color:rgb(22, 22, 22); color:white;" height="400px">
       <tr>
-        <th rowspan="1" colspan="10">Producto</th>
-        <th rowspan="1" colspan="20">Precio</th>
-        <th rowspan="1" colspan="10">Imagen</th>
+        <th rowspan="1" colspan="30">Categoría</th>
+        <th rowspan="1" colspan="30">Producto</th>
+        <th rowspan="1" colspan="30">Precio</th>
+        <th rowspan="1" colspan="30">Imagen</th>
       </tr>
       <tbody id="productos">
 

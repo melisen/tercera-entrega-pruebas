@@ -33,34 +33,50 @@
     <div>
         <h2 class="link-navbar" style="margin:20px;">Nuestros productos</h2>
 
-        {{#each data.todosProd}}
-        <div class="card" style="box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
+        <form method="post" action="/api/nuestros-productos/cat">
+            <h3 class="link-navbar" style="margin:20px;">Filtrar por categoría:</h3>
+            <label for="category">Elegir color:</label>
+            <select name="category" id="category">
+                <option value="todos">Todos</option>
+                <option value="multicolor">Multicolor</option>
+                <option value="blanco">Blanco</option>
+                <option value="negro">Negro</option>
+                <option value="rosa">Rosa</option>
+                <option value="azul">Azul</option>
+            </select><br>
+            <button type="submit">Filtrar</button>
+        </form>
+        <div style="display:flex; flex-wrap:wrap;">
+            {{#each data.todosProd}}
+            <div class="card" style="box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
             transition:0.3s;
             text-align:center;
+            width:300px;
             padding:1rem;
             margin:1rem 0.5rem; 
             display:flex;
             flex-direction:column;
             justify-content: center;
             align-items:center;">
-            <div class="container-img">
-                <img src="{{this.thumbnail}}" alt="{{this.title}}" class="img-card" />
+                <div class="container-img" style="width:200px;">
+                    <img src="{{this.thumbnail}}" alt="{{this.title}}" class="img-card" style="width:150px;" />
+                </div>
+                <div class="container">
+                    <h4>{{this.title}}</h4>
+                    <h4>$ {{this.price}}</h4>
+                </div>
+                <div class="container container-btn">
+                    <form method="post" action="/nuestros-productos">
+                        <input name="idprod" id="idprod" value="{{this._id}}" type="hidden">
+                        <button type="submit" id=""
+                            style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
+                            Ver detalle
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="container">
-                <h4>{{this.title}}</h4>
-                <h4>$ {{this.price}}</h4>
-            </div>
-            <div class="container container-btn">
-                <form method="post" action="/nuestros-productos">
-                    <input name="idprod" id="idprod" value="{{this._id}}" type="hidden">
-                    <button type="submit" id=""
-                        style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
-                        Ver detalle
-                    </button>
-                </form>
-            </div>
+            {{/each}}
         </div>
-        {{/each}}
 
     </div>
 
@@ -70,8 +86,8 @@
 
 
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./index.js"></script>
+
+
 </body>
 
 </html>

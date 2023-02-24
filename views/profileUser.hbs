@@ -46,14 +46,22 @@
 
     <div
         style="background-color:rgb(226, 225, 225); box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); padding:20px; margin:20px;">
-        <h3 style="color:rgb(18, 18, 122); font-weight:bold;">Mi perfil</h3>
-        <h4 style="color:rgb(18, 18, 122);"> {{user.nombre}} {{user.apellido}}</h4>
-        <h4 style="color:rgb(18, 18, 122);"> {{user.username}}</h4>
-        <h4 style="color:rgb(18, 18, 122);"> {{user.edad}}</h4>
-        <h4 style="color:rgb(18, 18, 122);"> {{user.direccion}}</h4>
-        <h4 style="color:rgb(18, 18, 122);"> {{user.telefono}}</h4>
-        <h4 style="color:rgb(18, 18, 122);"> Foto</h4>
-        <br />
+        <h2 style="color:rgb(31, 31, 154); font-weight:bold;">Mi perfil</h2>
+        <div style="width: 120px;
+            display:flex;
+            justify-content: center;
+            align-items:center;">
+            <img src="{{user.avatar}}" alt="{{user.username}}"
+                style="max-height: 100%; max-width: 100%; border-radius: 5px 5px 0 0;" />
+        </div><br />
+        <h4 style="color:rgb(18, 18, 122); ">Nombre: <span style="font-size:1.2rem;">{{user.nombre}}
+                {{user.apellido}}</span>
+        </h4>
+        <h4 style="color:rgb(18, 18, 122);">Usuario: <span style="font-size:1.2rem;"> {{user.username}}</span></h4>
+        <h4 style="color:rgb(18, 18, 122); "> Edad: <span style="font-size:1.2rem;">{{user.edad}}</span> </h4>
+        <h4 style="color:rgb(18, 18, 122); ">Dirección: <span style="font-size:1.2rem;"> {{user.direccion}}</span> </h4>
+        <h4 style="color:rgb(18, 18, 122); ">Teléfono: <span style="font-size:1.2rem;"> {{user.telefono}}</span></h4>
+
 
     </div>
 

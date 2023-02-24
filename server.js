@@ -248,7 +248,73 @@ app.get("/failsignup", routes.getFailsignup);
     }
   }
 
-app.post("/nuestros-productos", async (req, res)=>{
+
+  app.get('/api/nuestros-productos', auth, async (req, res)=>{
+    try{
+      const productos = await Productos.listarTodos();
+    const todosProd = productos.map( (item) => (
+      {
+        _id: item._id,
+        title:item.title,
+        price:item.price,
+        thumbnail:item.thumbnail,
+        category:item.category
+      }
+    ))
+    logger.log("info", "/api/nuestros-productos - GET")  
+    res.render("nuestros-productos", {data: {todosProd}})    
+  }
+  catch(err){
+    logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
+  }
+  })
+
+  app.post("/api/nuestros-productos/cat", async (req, res)=>{
+    const {category} = req.body;
+    res.redirect(`/api/nuestros-productos/${category}`)
+  })
+
+  app.get('/api/nuestros-productos/:category', auth, async (req, res)=>{
+  try{
+    const {category} = req.params
+    
+    if(category=="todos"){
+      console.log(category)
+      const productos = await Productos.listarTodos();
+      const todosProd = productos.map( (item) => (
+        {
+          _id: item._id,
+          title:item.title,
+          price:item.price,
+          thumbnail:item.thumbnail,
+          category:item.category
+        }
+      ))
+      logger.log("info", "/api/nuestros-productos/:category - GET")  
+      res.render("nuestros-productos", {data: {todosProd}}) 
+    } else{
+      const productos = await Productos.listarCategory(category);
+      
+      const todosProd = productos.map( (item) => (
+        {
+          _id: item._id,
+          title:item.title,
+          price:item.price,
+          thumbnail:item.thumbnail,
+          category:item.category
+        }
+      ))
+      logger.log("info", "/api/nuestros-productos/:category - GET")  
+      res.render("nuestros-productos", {data: {todosProd}}) 
+    }
+   
+  }
+  catch(err){
+    logger.log("error", "/api/nuestros-productos/:category -  GET  - error al mostrar catálogo por categoría")
+  }
+})
+
+  app.post("/nuestros-productos", async (req, res)=>{
 const {idprod} = req.body;
 
 const producto = await Productos.buscarPorId(idprod);
@@ -256,7 +322,8 @@ const prod = {
 title: producto.title,
 thumbnail: producto.thumbnail,
 price: producto.price,
-id: idprod
+id: idprod,
+category:item.category
 }
 res.render("detalle-producto", {data:{prod}})
 })
@@ -265,6 +332,8 @@ res.render("detalle-producto", {data:{prod}})
 
 
 app.post('/api/carrito', auth, routesCarrito.postCrearCarrito)
+
+
 
 app.post('/api/carrito/productos', auth, routesCarrito.postAgregarProdCarrito)
 //agrega un producto al carrito desde card de producto
@@ -296,6 +365,7 @@ app.get("/seguir-comprando", async (req, res)=>{
           title:item.title,
           price:item.price,
           thumbnail:item.thumbnail,
+          category:item.category
         }
       ))
       logger.log("info", "/seguir-comprando - GET")  

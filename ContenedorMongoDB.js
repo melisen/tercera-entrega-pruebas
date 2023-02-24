@@ -23,6 +23,10 @@ class ContenedorMongoDB{
         const todos = await this.modelo.find({})
         return todos
     }
+    async listarCategory(categorySelect){
+      const categoryProductos = await this.modelo.find({category: categorySelect}).exec()
+      return categoryProductos
+    }
 
     async buscarPorId(_id){
   const element = await this.modelo.findOne({_id: _id});
@@ -35,6 +39,7 @@ class ContenedorMongoDB{
             title: objeto.title,
             price: objeto.price,
             thumbnail: objeto.thumbnail,
+            category:objeto.category
             
         });
         const objGuardado = await nuevoObjeto.save();

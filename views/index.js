@@ -6,14 +6,16 @@ function render(data){
     const html = data.map( msg =>
         `
         <tr>
-            
-            <td rowspan="1" colspan="10" style=" font-weight:normal;  padding:5px; ">
-            ${msg.title}
+        <td colspan="30" style=" font-weight:normal; font-size:1.2rem; color:grey  padding:5px; ">
+        ${msg.category}
+        </td >
+            <td  colspan="30" style=" font-weight:normal; font-size:1.2rem;  padding:5px; ">
+            ${msg.title}   
             </td >
-            <td rowspan="1" colspan="20" style=" font-weight:normal;  padding:5px;">
+            <td  colspan="30" style=" font-weight:normal; font-size:1.2rem;  padding:5px;">
             $ ${msg.price}
             </td>
-            <td rowspan="1" colspan="10" style=" font-weight:normal; padding:5px;">
+            <td  colspan="30" style=" font-weight:normal; font-size:1.2rem; padding:5px;">
               <img src="${msg.thumbnail}" height="100px">
             </td>
         </tr>
@@ -57,34 +59,6 @@ function renderProdTest(data){
 
 
 
-/*
-function mostrarProductos(data){
-    const cardsProd = data.map(prod=>
-        `<div class="card">
-            <div class="container-img">
-                <img    src="${prod.thumbnail}"
-                        alt="${prod.title}"
-                        class="img-card"/>
-            </div>
-            <div class="container">
-                <h4>${prod.title.toUpperCase()}</h4>
-                <h4>$ ${prod.price}</h4>
-            </div>
-            <div class="container container-btn">
-            <form method="post" action="/nuestros-productos">
-                <input name="idprod" id="idprod" value="${prod._id}" type="hidden">
-                <button type="submit" id=""
-                    style="color:white; background-color:rgb(92, 200, 92); margin:20px; border-radius:3px; border-width:0px; padding:8px;">
-                    Ver detalle
-                </button>
-            </form>
-            </div>
-        </div>`).join(" ");
-        document.getElementById("productos-catalogo").innerHTML= cardsProd;
-}
-*/
-
-
 
 
 
@@ -95,7 +69,8 @@ function enviarProducto(){
     const title = document.getElementById('title').value
     const price = document.getElementById('price').value
     const thumbnail = document.getElementById('thumbnail').value
-    socket.emit('new_prod', {title: title, price: price, thumbnail:thumbnail})
+    const category = document.getElementById('category').value
+    socket.emit('new_prod', {category:category, title: title, price: price, thumbnail:thumbnail})
     document.getElementById('title').value = ''
     document.getElementById('price').value = ''
     document.getElementById('thumbnail').value = ''

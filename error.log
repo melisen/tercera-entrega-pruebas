@@ -144,3 +144,22 @@
 {"level":"error","message":"no se pudo agregar producto al carrito existente"}
 {"level":"error","message":"no se pudo agregar producto al carrito existente"}
 {"level":"error","message":"no se pudo agregar producto al carrito existente"}
+{"level":"error","message":"error al escuchar productos"}
+{"level":"error","message":"error al escuchar productos"}
+{"level":"error","message":"error al escuchar productos"}
+{"level":"error","message":"/nuestros-productos -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo de productos"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo por categoría"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo por categoría"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo por categoría"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo por categoría"}
+{"level":"error","message":"/api/nuestros-productos/:category -  GET  - error al mostrar catálogo por categoría"}

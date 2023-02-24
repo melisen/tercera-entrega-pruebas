@@ -28,9 +28,6 @@ async function enviarSMS(mensaje){
 //TWILIO WHATSAPP
 const whatsappADMIN = 'whatsapp:+5491127204753'
 const numeroSandbox = 'whatsapp:+14155238886'
-
- 
-
 /*
 EJ PARAMETRO DE clientWhatsapp.messages.create()
 const mensajeWhats = { 

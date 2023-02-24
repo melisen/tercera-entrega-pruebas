@@ -22,8 +22,6 @@ const Usuarios = require("./models/usuarios")
 
 
 const postCrearCarrito = async (req, res)=>{
-  //viene de "Crear nuevo carrto" en vista de Nuestros Productos
-
   try{
     const nuevoCarrito = new CarritoModel({
       productos: []
@@ -37,18 +35,9 @@ const postCrearCarrito = async (req, res)=>{
       { $set: {carritoactual: id}})
       // The $set operator replaces the value of a field with the specified value. 
       // para cambiar si fuera un array de ids de carritos -->{ $push: {carritos: objCarrito._id}})      
-    const productos = await Productos.listarTodos();
-    const todosProd = productos.map( (item) => (
-      {
-        _id: item._id,
-        title:item.title,
-        price:item.price,
-        thumbnail:item.thumbnail,
-      }
-    ))
-    logger.log("info", "/api/carrito - POST")  
-    res.render("nuestros-productos", {data: {todosProd, id}})    
-  }
+    
+    res.redirect("/api/nuestros-productos")
+    }
   catch(err){
     logger.log("error", "/nuestros-productos -  GET  - error al mostrar catálogo de productos")
   }
