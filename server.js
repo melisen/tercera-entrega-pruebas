@@ -323,7 +323,7 @@ title: producto.title,
 thumbnail: producto.thumbnail,
 price: producto.price,
 id: idprod,
-category:item.category
+category:producto.category
 }
 res.render("detalle-producto", {data:{prod}})
 })

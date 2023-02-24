@@ -14,15 +14,21 @@
         <nav id="navbar">
             <div class="container-fluid">
 
-                <ul style="display:flex; flex-direction:row; justify-content:space-around;">
-                    <li class="btn-navbar">
-                        <a class="link-navbar" href="/api/productos">Administración</a>
+                <ul style="display:flex; flex-direction:row; justify-content:space-around; font-size:1.3rem;">
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <a class="link-navbar"
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                            href="/api/productos">Administración</a>
                     </li>
-                    <li class="btn-navbar">
-                        <a class="link-navbar" href="/ver-carrito">Ver Carrito</a>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <a class="link-navbar"
+                            style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                            href="/ver-carrito">Ver Carrito</a>
                     </li>
-                    <li class="btn-navbar">
-                        <button><a class="link-navbar" style="font-size:1rem;" href="/logout">Cerrar sesión</a></button>
+                    <li class="btn-navbar" style="text-decoration:none; list-style-type:none;">
+                        <button><a class="link-navbar"
+                                style="text-decoration:none; list-style-type:none; color:rgb(61, 12, 140);"
+                                href="/logout">Cerrar sesión</a></button>
                     </li>
                 </ul>
 
@@ -31,12 +37,12 @@
     </header>
 
     <div>
-        <h2 class="link-navbar" style="margin:20px;">Nuestros productos</h2>
+        <h2 class="link-navbar" style="margin:20px; color:rgb(91, 42, 136)">Nuestros productos</h2>
 
         <form method="post" action="/api/nuestros-productos/cat">
-            <h3 class="link-navbar" style="margin:20px;">Filtrar por categoría:</h3>
-            <label for="category">Elegir color:</label>
-            <select name="category" id="category">
+            <h3 class="link-navbar" style="margin:20px; color:rgb(64, 5, 119)">Filtrar por categoría:</h3>
+            <label for="category" style="margin:20px; color:rgb(138, 93, 180)">Elegir color:</label>
+            <select name="category" id="category" style="margin:20px;">
                 <option value="todos">Todos</option>
                 <option value="multicolor">Multicolor</option>
                 <option value="blanco">Blanco</option>
@@ -44,7 +50,7 @@
                 <option value="rosa">Rosa</option>
                 <option value="azul">Azul</option>
             </select><br>
-            <button type="submit">Filtrar</button>
+            <button type="submit" style="background-color:rgb(130, 95, 164); margin:0 20px;"> Filtrar</button>
         </form>
         <div style="display:flex; flex-wrap:wrap;">
             {{#each data.todosProd}}
